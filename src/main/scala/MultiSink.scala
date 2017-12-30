@@ -11,7 +11,7 @@ class MultiSink(sinks : Array[Sink], dataPersistenceLevel: Option[StorageLevel] 
 
   override def addBatch(batchId: Long, data: DataFrame): Unit = {
     dataPersistenceLevel match {
-        case Some(persistenceLevel) => data.cache(persistenceLevel)
+        case Some(persistenceLevel) => data.persist(persistenceLevel)
     }
     
     sinks.foreach(sink => sink.addBatch(batchId, data))
