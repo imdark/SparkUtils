@@ -10,7 +10,7 @@ class MultiSink(sinks : Array[Sink], dataPersistenceLevel: Option[StorageLevel] 
   override def toString(): String = "MultiSink"
 
   override def addBatch(batchId: Long, data: DataFrame): Unit = {
-    match dataPersistenceLevel {
+    dataPersistenceLevel match {
         case Some(persistenceLevel) => data.cache(persistenceLevel)
     }
     
